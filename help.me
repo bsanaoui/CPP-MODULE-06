@@ -11,11 +11,12 @@
  - typecasting pointer to another pointer;
 
 // ------- static_cast in c++ ------------ //
-
+static_cast − This is used for the normal/ordinary type conversion. 
+This is also the cast responsible for implicit type coersion and can also be called explicitly.
 
 // ------- dynamique casting in c++ ------------ //
 dynamic_cast<T *>(ptr) will return 0 in case ptr is not a pointer of type T, and will return a pointer of type T otherwise
-
+t's used primarily for things like turning a raw data bit stream into actual data or storing data in the low bits of an aligned pointer.
 
 // ------------------------------------------//
 * fprintf :
@@ -30,3 +31,6 @@ dynamic_cast<T *>(ptr) will return 0 in case ptr is not a pointer of type T, and
 * fseek (file, offset, origin)
     - offset = An offset generally refers to a value that is added to another base value, usually a (base) pointer in order to access a single element in a sequential list of elements, usually an array.
     - origin like SEEK_SET = begin of cursus
+
+
+static_cast<>() gives you a compile time checking ability, C-Style cast doesn't.

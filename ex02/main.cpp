@@ -8,6 +8,7 @@
 // ------ !!!!!!!!!! diff bitween dynamic_cast and typeid
 Base * generate(void)
 {
+    srand(time(NULL));
     Base *bases[3] = {
         new A(),
         new B(),
@@ -32,14 +33,17 @@ void identify(Base* p)
 void identify(Base& p)
 {
     std::cout << "The generated type is ";
-    if (typeid(p) == typeid(A))
-        std::cout << "'A'" << std::endl;
-    else if (typeid(p) == typeid(B))
-        std::cout << "'B'" << std::endl;
-    else if (typeid(p) == typeid(C))
-        std::cout << "'C'" << std::endl;
-    else
-        std::cout << "'Unknown'" << std::endl;
+ 
+    try {p = dynamic_cast<A&>(p); std::cout << "'A'" << std::endl; return;}
+    catch(std::exception &e){}
+
+    try {p = dynamic_cast<B&>(p); std::cout << "'B'" << std::endl; return ;}
+    catch(std::exception &e){}
+
+    try {p = dynamic_cast<C&>(p); std::cout << "'C'" << std::endl; return ;}
+    catch(std::exception &e){}
+
+    std::cout << "'Unknown'" << std::endl;
 }
 
 int main()

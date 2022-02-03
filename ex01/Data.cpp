@@ -1,28 +1,41 @@
 #include "Data.hpp"
 
-Data::Data( std::string title, int id ) : _title(title), _id(id) {}
+data::data( std::string title, int id ) : _title(title), _id(id) {}
 
-std::string Data::getTitle( void ) const
+data::data() : _title("unkonwn"), _id(0){}
+
+data::~data(){}
+
+data::data( const data &dt) {*this = dt;}
+
+data& data::operator = (const data &dt)
+{
+    this->_title = dt._title;
+    this->_id = dt._id;
+    return (*this);
+}
+
+std::string data::getTitle( void ) const
 {
     return (this->_title);
 }
 
-int         Data::getId( void ) const
+int         data::getId( void ) const
 {
     return (this->_id);
 }
 
-void        Data::setTitle( std::string title )
+void        data::setTitle( std::string title )
 {
     this->_title = title;
 }
 
-void        Data::setId( int id)
+void        data::setId( int id)
 {
     this->_id = id;
 }
 
-std::ostream& operator << (std::ostream& os, const Data& dt)
+std::ostream& operator << (std::ostream& os, const data& dt)
 {
     os << "Id is :" << dt.getId() << ", Title is :" << dt.getTitle() << ".";
     return (os);

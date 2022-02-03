@@ -3,78 +3,91 @@
 
 #include <iomanip>
 
-char toChar( std::string value )
+void toChar( std::string value )
 {
-    int c;
-    try
+    char c;
+
+    if (value.length() == 1)
     {
-        c = std::stoi(value); // std::atoi(value.c_str();)
+        try
+        {
+            c = static_cast<char>(std::stoi(value));
+        }
+        catch(const std::exception& e)
+        {
+            c = value[0];
+        }
+        if ((char)c < 32 || (char)c > 127)
+            std::cout << "char: " << "Non displayable" << std::endl;
+        else
+            std::cout << "char: '" << c << "'" << std::endl;
     }
-    catch(const std::exception& e)
-    {
-        std::cout << "char: " << "impossible" << std::endl;
-        return (c);
-    }
-    if (c < 33 || c > 123)
-        std::cout << "char: " << "Non displayable" << std::endl;
     else
-        std::cout << "char: '" << c << "'" << std::endl;
-    return (c);
+    {
+        try
+        {
+            c = static_cast<char>(std::stoi(value)); // std::atoi(value.c_str();)
+        }
+        catch(const std::exception& e)
+        {
+            std::cout << "char: " << "impossible" << std::endl;
+            return ;
+        }
+        if (c < 32 || c > 127)
+            std::cout << "char: " << "Non displayable" << std::endl;
+        else
+            std::cout << "char: '" << c << "'" << std::endl;
+    }
+   
 }
 
-double toDouble( std::string value )
+void toDouble( std::string value )
 {
     double d;
     try
     {
-        d = std::stod(value);
+        d = static_cast<double>(std::stod(value));
         std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
     }
     catch (const std::exception& e)
     {
         std::cout << "double: " << "impossible" << std::endl;
-        return (0); // error in toChar
     }
-    return d;
 }
 
-float toFloat( std::string value )
+void toFloat( std::string value )
 {
     float f;
     try
     {
-        f = std::stof(value);
+        f = static_cast<float>(std::stof(value));
         std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
     }
     catch (const std::exception& e)
     {
         std::cout << "float: " << "impossible" << std::endl;
-        return (0); // error in toChar
     }
-    return f;
 }
 
-int toInt( std::string value )
+void toInt( std::string value )
 {
     int i;
     try
     {
-        i = std::stoi(value);
+        i = static_cast<int>(std::stoi(value));
         std::cout << "int: " << i << std::endl;
     }
     catch (const std::exception& e)
     {
         std::cout << "int: " << "impossible" << std::endl;
-        return (0);
     }
-    return i;
 }
 
 int main(int argc, char *argv[])
 {
     if (argc == 2)
     {
-        toChar(argv[1]); // 33 -> 126
+        toChar(argv[1]); // 32 -> 127
         toInt(argv[1]);
         toFloat(argv[1]); 
         toDouble(argv[1]); 
